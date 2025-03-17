@@ -32,3 +32,5 @@ kube_flannel_helm_release_values:
       - --kube-subnet-mgr
       - --iface={{ ansible_default_ipv4.interface }}
     backend: vxlan
+  netpol:
+    enabled: true
