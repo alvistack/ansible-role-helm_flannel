@@ -52,6 +52,6 @@ roles:
     src: https://github.com/alvistack/ansible-role-kube_kubectl
     version: develop
 
-  - name: alvistack.kube_addon_manager
-    src: https://github.com/alvistack/ansible-role-kube_addon_manager
+  - name: alvistack.helm
+    src: https://github.com/alvistack/ansible-role-helm
     version: develop
