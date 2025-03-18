@@ -1,13 +1,13 @@
-# Ansible Role for Flannel on Kubernetes
+# Ansible Role for Flannel with Helm
 
 <img src="/alvistack.svg" width="75" alt="AlviStack">
 
-[![Gitlab pipeline status](https://img.shields.io/gitlab/pipeline/alvistack/ansible-role-kube_flannel/master)](https://gitlab.com/alvistack/ansible-role-kube_flannel/-/pipelines)
-[![GitHub tag](https://img.shields.io/github/tag/alvistack/ansible-role-kube_flannel.svg)](https://github.com/alvistack/ansible-role-kube_flannel/tags)
-[![GitHub license](https://img.shields.io/github/license/alvistack/ansible-role-kube_flannel.svg)](https://github.com/alvistack/ansible-role-kube_flannel/blob/master/LICENSE)
-[![Ansible Role](https://img.shields.io/badge/galaxy-alvistack.kube_flannel-blue.svg)](https://galaxy.ansible.com/alvistack/kube_flannel)
+[![Gitlab pipeline status](https://img.shields.io/gitlab/pipeline/alvistack/ansible-role-helm_flannel/master)](https://gitlab.com/alvistack/ansible-role-helm_flannel/-/pipelines)
+[![GitHub tag](https://img.shields.io/github/tag/alvistack/ansible-role-helm_flannel.svg)](https://github.com/alvistack/ansible-role-helm_flannel/tags)
+[![GitHub license](https://img.shields.io/github/license/alvistack/ansible-role-helm_flannel.svg)](https://github.com/alvistack/ansible-role-helm_flannel/blob/master/LICENSE)
+[![Ansible Role](https://img.shields.io/badge/galaxy-alvistack.helm_flannel-blue.svg)](https://galaxy.ansible.com/alvistack/helm_flannel)
 
-Ansible Role for Flannel on Kubernetes Installation.
+Ansible Role for Flannel with Helm Installation.
 
 ## Requirements
 

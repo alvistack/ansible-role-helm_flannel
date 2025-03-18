@@ -15,13 +15,13 @@
 # limitations under the License.
 
 # Release name to manage.
-kube_flannel_helm_release_name: flannel
+helm_flannel_helm_release_name: flannel
 
 # Kubernetes namespace where the chart should be installed.
-kube_flannel_helm_release_namespace: kube-system
+helm_flannel_helm_release_namespace: kube-system
 
 # Value to pass to chart.
-kube_flannel_helm_release_values:
+helm_flannel_helm_release_values:
   podCidr: 10.233.64.0/18
   flannel:
     cniBinDir: /opt/cni/bin

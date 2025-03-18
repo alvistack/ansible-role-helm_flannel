@@ -122,4 +122,4 @@
 
     - name: include role
       ansible.builtin.include_role:
-        name: alvistack.kube_flannel
+        name: alvistack.helm_flannel
