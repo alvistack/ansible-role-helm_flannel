@@ -13,85 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-- name: converge | kube_master:kube_node
-  hosts: kube_master:kube_node
-  remote_user: root
-  become: true
-  tasks:
-    - name: include role
-      ansible.builtin.include_role:
-        name: alvistack.cri_o
-
-    - name: include role
-      ansible.builtin.include_role:
-        name: alvistack.kube_kubelet
-
-- name: converge | etcd
-  hosts: etcd
-  remote_user: root
-  become: true
-  tasks:
-    - name: include role
-      ansible.builtin.include_role:
-        name: alvistack.etcd
-
-- name: converge | kube_master
-  hosts: kube_master
-  remote_user: root
-  become: true
-  tasks:
-    - name: include role
-      ansible.builtin.include_role:
-        name: alvistack.kube_master
-
-- name: converge | kube_node:!kube_master
-  hosts: kube_node:!kube_master
-  remote_user: root
-  become: true
-  tasks:
-    - name: include role
-      ansible.builtin.include_role:
-        name: alvistack.kube_node
-
-- name: converge | ansible
-  hosts: ansible
-  remote_user: root
-  become: true
-  tasks:
-    - name: include role
-      ansible.builtin.include_role:
-        name: alvistack.sonobuoy
-
-    - name: include role
-      ansible.builtin.include_role:
-        name: alvistack.kube_kubectl
-
-    - name: base64 encode
-      ansible.builtin.shell:
-        cmd: |
-          set -euxo pipefail
-          tar zcfP - {{ _params | join(' ') }} | base64 -w 0
-      vars:
-        _params:
-          - /etc/etcd/pki
-          - /etc/kubernetes/admin.conf
-          - /etc/kubernetes/pki
-      args:
-        executable: /bin/bash
-      delegate_to: "{{ groups['kube_master'][0] }}"
-      register: base64_encode_result
-      changed_when: base64_encode_result is not succeeded
-
-    - name: base64 decode
-      ansible.builtin.shell:
-        cmd: |
-          set -euxo pipefail
-          echo -n {{ base64_encode_result.stdout | quote }} | base64 -d | tar zx -C /
-      args:
-        executable: /bin/bash
-      register: base64_decode_result
-      changed_when: base64_decode_result is not succeeded
-
 - name: converge | kube_master
   hosts: kube_master
   remote_user: root
@@ -104,7 +25,7 @@
           kubectl get --raw='/readyz?verbose' | grep 'check passed'
       args:
         executable: /bin/bash
-      when: inventory_hostname == ansible_play_hosts[0]
+      when: inventory_hostname == groups['kube_master'][0]
       register: result
       changed_when: result is not succeeded
       until: result is succeeded
