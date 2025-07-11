@@ -12,7 +12,7 @@ flannel:
   # kube-flannel image
   image:
     repository: ghcr.io/flannel-io/flannel
-    tag: v0.27.0
+    tag: v0.27.1
   image_cni:
     repository: ghcr.io/flannel-io/flannel-cni-plugin
     tag: v1.7.1-flannel1
@@ -82,11 +82,16 @@ flannel:
   #
   # General daemonset configs
   #
+  resources:
+    requests:
+      cpu: 100m
+      memory: 50Mi
   tolerations:
   - effect: NoExecute
     operator: Exists
   - effect: NoSchedule
     operator: Exists
+  nodeSelector: {}
 
 netpol:
   enabled: false

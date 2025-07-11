@@ -31,6 +31,10 @@ spec:
       tolerations:
         {{- toYaml . | trim | nindent 8 }}
       {{- end }}
+      {{- with .Values.flannel.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
       serviceAccountName: flannel
       initContainers:
       - name: install-cni-plugin
@@ -67,10 +71,10 @@ spec:
         {{- range .Values.flannel.args }}
         - {{ . | quote }}
         {{- end }}
+        {{- with .Values.flannel.resources }}
         resources:
-          requests:
-            cpu: "100m"
-            memory: "50Mi"
+          {{- toYaml . | trim | nindent 10 }}
+        {{- end }}
         securityContext:
           privileged: false
           capabilities:
@@ -86,6 +90,8 @@ spec:
               fieldPath: metadata.namespace
         - name: EVENT_QUEUE_DEPTH
           value: "5000"
+        - name: CONT_WHEN_CACHE_NOT_READY
+          value: "false"
         volumeMounts:
         - name: run
           mountPath: /run/flannel
