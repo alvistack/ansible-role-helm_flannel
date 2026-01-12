@@ -30,7 +30,7 @@ helm_flannel_helm_release_values:
     args:
       - --ip-masq
       - --kube-subnet-mgr
-      - --iface={{ ansible_default_ipv4.interface }}
+      - --iface={{ ansible_facts['default_ipv4'].interface }}
     backend: vxlan
   netpol:
     enabled: true
