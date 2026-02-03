@@ -13,24 +13,3 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
-# Release name to manage.
-helm_flannel_helm_release_name: flannel
-
-# Kubernetes namespace where the chart should be installed.
-helm_flannel_helm_release_namespace: kube-system
-
-# Value to pass to chart.
-helm_flannel_helm_release_values:
-  podCidr: 10.233.64.0/18
-  flannel:
-    cniBinDir: /opt/cni/bin
-    cniConfDir: /etc/cni/net.d
-    enableNFTables: false
-    args:
-      - --ip-masq
-      - --kube-subnet-mgr
-      - --iface={{ ansible_facts['default_ipv4'].interface }}
-    backend: vxlan
-  netpol:
-    enabled: true
