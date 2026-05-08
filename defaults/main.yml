@@ -24,6 +24,11 @@ helm_flannel_helm_release_namespace: kube-system
 helm_flannel_helm_release_values:
   podCidr: 10.233.64.0/18
   flannel:
+    image:
+      repository: ghcr.io/flannel-io/flannel
+    flannel_cni:
+      image:
+        repository: ghcr.io/flannel-io/flannel-cni-plugin
     cniBinDir: /opt/cni/bin
     cniConfDir: /etc/cni/net.d
     enableNFTables: false
