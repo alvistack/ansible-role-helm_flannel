@@ -30,7 +30,7 @@ helm_flannel_helm_release_values:
       image:
         repository: ghcr.io/flannel-io/flannel-cni-plugin
     cniBinDir: /opt/cni/bin
-    cniConfDir: /etc/cni/net.d
+    cniConfDir: /etc/containers/networks
     enableNFTables: false
     args:
       - --ip-masq
