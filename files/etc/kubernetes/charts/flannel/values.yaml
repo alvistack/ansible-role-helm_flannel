@@ -12,11 +12,11 @@ flannel:
   # kube-flannel image
   image:
     repository: ghcr.io/flannel-io/flannel
-    tag: v0.28.9
+    tag: v0.28.10
   flannel_cni:
     image:
       repository: ghcr.io/flannel-io/flannel-cni-plugin
-      tag: v1.9.1-flannel2
+      tag: v1.9.1-flannel3
   # cniBinDir is the directory to which the flannel CNI binary is installed.
   cniBinDir: "/opt/cni/bin"
   # cniConfDir is the directory where the CNI configuration is located.
@@ -63,7 +63,7 @@ flannel:
   cniConf: |
     {
       "name": "cbr0",
-      "cniVersion": "0.3.1",
+      "cniVersion": "1.0.0",
       "plugins": [
         {
           "type": "flannel",
@@ -87,6 +87,16 @@ flannel:
     requests:
       cpu: 100m
       memory: 50Mi
+  # Health check server configuration. Set port to a non-zero value to enable.
+  # /healthz is the liveness endpoint; /readyz is the readiness endpoint.
+  healthz:
+    port: 8081
+    livenessProbe:
+      initialDelaySeconds: 10
+      periodSeconds: 30
+    readinessProbe:
+      initialDelaySeconds: 5
+      periodSeconds: 10
   tolerations:
   - effect: NoExecute
     operator: Exists
