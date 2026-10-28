@@ -22,7 +22,7 @@ helm_flannel_helm_release_namespace: kube-system
 
 # Value to pass to chart.
 helm_flannel_helm_release_values:
-  podCidr: 10.233.64.0/18
+  podCidr: "10.233.64.0/18"
   flannel:
     image:
       repository: ghcr.io/flannel-io/flannel
@@ -37,5 +37,6 @@ helm_flannel_helm_release_values:
       - --kube-subnet-mgr
       - --iface={{ ansible_facts['default_ipv4'].interface }}
     backend: vxlan
+    directRouting: true
   netpol:
     enabled: true
